@@ -8,12 +8,11 @@ describe("Image Processing", () => {
     try {
       const data = await imgProcess(image, width, height);
       console.log(data, "expected");
-      expect(data).toBe(`./tmp/${image}-${width}x${height}.jpg`);
+      expect(data).toEqual(`./tmp/${image}-${width}x${height}.jpg`);
       fs.unlink(data, (err) => {
         if (err) throw err;
       });
     } catch (err_1) {
-      console.log(err_1);
       expect(err_1).toBeNull();
     }
   });

@@ -58,7 +58,6 @@ function CheckImg(req, res, next) {
     });
 }
 exports.CheckImg = CheckImg;
-;
 function Checktmp(req, res, next) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, image, width, height, imgpath;
@@ -76,4 +75,3 @@ function Checktmp(req, res, next) {
     });
 }
 exports.Checktmp = Checktmp;
-;

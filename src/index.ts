@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import router from "./routes/index";
 const app = express();
 
-app.get("/", (req:Request, res:Response):void => {
+app.get("/", (req: Request, res: Response): void => {
   res.send("Hello World!");
 });
 

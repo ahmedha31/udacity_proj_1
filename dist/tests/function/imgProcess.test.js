@@ -40,6 +40,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var imgProcess_1 = __importDefault(require("../../functions/imgProcess"));
+var fs_1 = __importDefault(require("fs"));
 describe("Image Processing", function () {
     it("should return a path to the resized image", function () { return __awaiter(void 0, void 0, void 0, function () {
         var image, width, height, data, err_1_1;
@@ -56,11 +57,14 @@ describe("Image Processing", function () {
                 case 2:
                     data = _a.sent();
                     console.log(data, "expected");
-                    expect(data).toBe("./tmp/".concat(image, "-").concat(width, "x").concat(height, ".jpg"));
+                    expect(data).toEqual("./tmp/".concat(image, "-").concat(width, "x").concat(height, ".jpg"));
+                    fs_1["default"].unlink(data, function (err) {
+                        if (err)
+                            throw err;
+                    });
                     return [3 /*break*/, 4];
                 case 3:
                     err_1_1 = _a.sent();
-                    console.log(err_1_1);
                     expect(err_1_1).toBeNull();
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];

@@ -1,4 +1,3 @@
-import fs from "fs";
 import sharp from "sharp";
 export default async function imgProcess(
   image: string,

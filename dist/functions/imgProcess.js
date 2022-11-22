@@ -48,7 +48,8 @@ function imgProcess(image, width, height) {
             return [2 /*return*/, (0, sharp_1["default"])(imgpath)
                     .resize(Number(width), Number(height))
                     .toFormat("jpg")
-                    .toFile("./tmp/".concat(image, "-").concat(width, "x").concat(height, ".jpg")).then(function (data) {
+                    .toFile("./tmp/".concat(image, "-").concat(width, "x").concat(height, ".jpg"))
+                    .then(function (data) {
                     return "./tmp/".concat(image, "-").concat(width, "x").concat(height, ".jpg");
                 })["catch"](function (err) {
                     console.log(err);
