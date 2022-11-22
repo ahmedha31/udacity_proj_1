@@ -40,61 +40,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 exports.__esModule = true;
 var express_1 = require("express");
-var sharp_1 = __importDefault(require("sharp"));
-var fs_1 = __importDefault(require("fs"));
+var imgProcess_1 = __importDefault(require("../functions/imgProcess"));
+var CheckImg_1 = require("../middleware/CheckImg");
 var router = (0, express_1.Router)();
+router.use([CheckImg_1.CheckImg, CheckImg_1.Checktmp]);
 router.get("/image", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var image, width, height, imgpath;
-    return __generator(this, function (_a) {
-        image = req.query.image;
-        width = req.query.width;
-        height = req.query.height;
-        imgpath = "./images/".concat(image, ".jpg");
-        try {
-            if (width && height) {
-                imgpath = "./tmp/".concat(image, "-").concat(width, "x").concat(height, ".jpg");
-                fs_1["default"].readFile(imgpath, function (err, data) {
-                    if (err) {
-                        fs_1["default"].readFile("./images/".concat(image, ".jpg"), function (err, data) {
-                            if (err) {
-                                res.send("Image not found");
-                            }
-                            else {
-                                (0, sharp_1["default"])(data)
-                                    .resize(Number(width), Number(height))
-                                    .toFormat("jpg")
-                                    .toBuffer()
-                                    .then(function (data) {
-                                    fs_1["default"].createWriteStream("./tmp/".concat(image, "-").concat(width, "x").concat(height, ".jpg"), {
-                                        flags: "w"
-                                    }).write(data);
-                                    res.writeHead(200, { "Content-Type": "image/jpeg" });
-                                    res.end(data);
-                                });
-                            }
-                        });
-                    }
-                    else {
-                        res.writeHead(200, { "Content-Type": "image/jpeg" });
-                        res.end(data);
-                    }
-                });
-            }
-            else {
-                fs_1["default"].readFile(imgpath, function (err, data) {
-                    if (err) {
-                        res.status(404).send("Image not found");
-                    }
-                    else {
-                        res.writeHead(200, { "Content-Type": "image/jpeg" });
-                        res.end(data);
-                    }
-                });
-            }
-        }
-        catch (error) {
-            res.status(502).send("internal server error");
-        }
+    var _a, image, width, height;
+    return __generator(this, function (_b) {
+        _a = req.query, image = _a.image, width = _a.width, height = _a.height;
+        (0, imgProcess_1["default"])(image, width, height)
+            .then(function (data) {
+            res.send(data);
+        })["catch"](function (err) {
+            res.status(500).send(err);
+        });
         return [2 /*return*/];
     });
 }); });
