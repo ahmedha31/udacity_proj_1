@@ -9,7 +9,7 @@ describe("Image Processing", () => {
     try {
       const data = await imgProcess(image, width, height);
       console.log(data, "expected");
-      expect(data).toEqual(tmppath()+"/"+image+"-"+width+"x"+height+".jpg");
+      expect(data).toEqual(tmppath()+`/${image}-${width}x${height}.jpg`);
       fs.unlink(data, (err) => {
         if (err) throw err;
       });
