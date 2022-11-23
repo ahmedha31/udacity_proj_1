@@ -5,13 +5,13 @@ export default async function imgProcess(
   width: string,
   height: string
 ): Promise<string> {
-  var imgpath = imagespath()+ `/${image}.jpg`;
+  const imgpath = imagespath()+ `/${image}.jpg`;
 
   return sharp(imgpath)
     .resize(Number(width), Number(height))
     .toFormat("jpg")
     .toFile(tmppath()+ `/${image}-${width}x${height}.jpg`)
-    .then((data) => {
+    .then(() => {
       return  tmppath()+`/${image}-${width}x${height}.jpg`;
     })
     .catch((err) => {

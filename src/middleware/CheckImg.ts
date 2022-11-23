@@ -7,7 +7,7 @@ export async function CheckImg(
   next: NextFunction
 ): Promise<void> {
   const { image } = req.query;
-  var imgpath = imagespath() + `/${image}.jpg`;
+  const imgpath = imagespath() + `/${image}.jpg`;
   if (fs.existsSync(imgpath)) {
     next();
   } else {
@@ -25,7 +25,7 @@ export async function Checktmp(
     if (err) throw err;
   });
 
-  var imgpath = tmppath() + `/${image}-${width}x${height}.jpg`;
+  const imgpath = tmppath() + `/${image}-${width}x${height}.jpg`;
   if (fs.existsSync(imgpath)) {
     fs.createReadStream(imgpath).pipe(res);
   } else {
