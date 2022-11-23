@@ -21,6 +21,10 @@ export async function Checktmp(
   next: NextFunction
 ): Promise<void> {
   const { image, width, height } = req.query;
+  fs.mkdir(tmppath(), { recursive: true }, (err) => {
+    if (err) throw err;
+  });
+  
   var imgpath = tmppath() + `/${image}-${width}x${height}.jpg`;
   if (fs.existsSync(imgpath)) {
     fs.createReadStream(imgpath).pipe(res);
