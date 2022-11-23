@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs";
+import { imagespath, tmppath } from "../functions/getpath";
 export async function CheckImg(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> {
   const { image } = req.query;
-  var imgpath = `./images/${image}.jpg`;
+  var imgpath = imagespath() + `./${image}.jpg`;
   if (fs.existsSync(imgpath)) {
     next();
   } else {
@@ -18,9 +19,9 @@ export async function Checktmp(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): Promise<void> {
   const { image, width, height } = req.query;
-  var imgpath = `./tmp/${image}-${width}x${height}.jpg`;
+  var imgpath = tmppath() + `/${image}-${width}x${height}.jpg`;
   if (fs.existsSync(imgpath)) {
     fs.createReadStream(imgpath).pipe(res);
   } else {

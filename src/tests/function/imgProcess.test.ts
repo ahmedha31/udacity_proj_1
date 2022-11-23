@@ -1,5 +1,6 @@
 import imgProcess from "../../functions/imgProcess";
 import fs from "fs";
+import { tmppath } from "../../functions/getpath";
 describe("Image Processing", () => {
   it("should return a path to the resized image", async () => {
     const image = "fjord";
@@ -8,7 +9,7 @@ describe("Image Processing", () => {
     try {
       const data = await imgProcess(image, width, height);
       console.log(data, "expected");
-      expect(data).toEqual(`./tmp/${image}-${width}x${height}.jpg`);
+      expect(data).toEqual(tmppath()+"/"+image+"-"+width+"x"+height+".jpg");
       fs.unlink(data, (err) => {
         if (err) throw err;
       });
