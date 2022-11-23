@@ -10,7 +10,7 @@ export default async function imgProcess(
   return sharp(imgpath)
     .resize(Number(width), Number(height))
     .toFormat("jpg")
-    .toFile(tmppath+ `/${image}-${width}x${height}.jpg`)
+    .toFile(tmppath()+ `/${image}-${width}x${height}.jpg`)
     .then((data) => {
       return  tmppath()+`/${image}-${width}x${height}.jpg`;
     })

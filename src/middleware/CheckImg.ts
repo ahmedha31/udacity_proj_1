@@ -7,7 +7,7 @@ export async function CheckImg(
   next: NextFunction
 ): Promise<void> {
   const { image } = req.query;
-  var imgpath = imagespath() + `./${image}.jpg`;
+  var imgpath = imagespath() + `/${image}.jpg`;
   if (fs.existsSync(imgpath)) {
     next();
   } else {
